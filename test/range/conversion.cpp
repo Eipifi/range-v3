@@ -117,9 +117,8 @@ int main()
         auto r1 = view::indices( std::uintmax_t{ 100 } );
         auto r2 = view::zip( r1, r1 );
 
-        std::map<std::uintmax_t, std::uintmax_t> m = r2;
-        (void) m;
-        (void)(r2 | ranges::to<std::map<std::uintmax_t, std::uintmax_t>>);
+        auto m = r2 | ranges::to<std::map<std::uintmax_t, std::uintmax_t>>();
+        CPP_assert(Same<decltype(m), std::map<std::uintmax_t, std::uintmax_t>>);
     }
 
     test_zip_to_map(view::zip(view::ints, view::iota(0, 10)), 0);
